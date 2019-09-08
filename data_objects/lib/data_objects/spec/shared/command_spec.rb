@@ -1,3 +1,4 @@
+require 'spec_helper'
 WINDOWS = Gem.win_platform? || (JRUBY && ENV_JAVA['os.name'] =~ /windows/i)
 
 shared_examples_for 'a Command' do
@@ -49,7 +50,7 @@ shared_examples_for 'a Command' do
     describe 'with a valid statement' do
 
       it 'should not raise an error with an explicit nil as parameter' do
-        expect { @arg_command.execute_non_query(nil, nil) }.not_to raise_error(ArgumentError)
+        expect { @arg_command.execute_non_query(nil, nil) }.not_to raise_error
       end
 
     end
@@ -61,7 +62,7 @@ shared_examples_for 'a Command' do
       end
 
       it 'should not raise an error' do
-        expect { @command_with_quotes.execute_non_query }.not_to raise_error(ArgumentError)
+        expect { @command_with_quotes.execute_non_query }.not_to raise_error
       end
 
     end
@@ -98,7 +99,7 @@ shared_examples_for 'a Command' do
     describe 'with a valid reader' do
 
       it 'should not raise an error with an explicit nil as parameter' do
-        expect { @arg_reader.execute_reader(nil, nil) }.not_to raise_error(ArgumentError)
+        expect { @arg_reader.execute_reader(nil, nil) }.not_to raise_error
       end
 
       unless defined?(JRUBY)
@@ -119,7 +120,7 @@ shared_examples_for 'a Command' do
       end
 
       it 'should not raise an error' do
-        expect { @reader_with_quotes.execute_reader(nil) }.not_to raise_error(ArgumentError)
+        expect { @reader_with_quotes.execute_reader(nil) }.not_to raise_error
       end
 
     end
@@ -163,26 +164,26 @@ shared_examples_for 'a Command' do
 
       it 'should not raise an error with correct number of types' do
         @reader.set_types(String, String)
-        expect { @result = @reader.execute_reader('Buy this product now!') }.not_to raise_error(ArgumentError)
-        expect { @result.next!  }.not_to raise_error(DataObjects::DataError)
-        expect { @result.values }.not_to raise_error(DataObjects::DataError)
+        expect { @result = @reader.execute_reader('Buy this product now!') }.not_to raise_error
+        expect { @result.next!  }.not_to raise_error
+        expect { @result.values }.not_to raise_error
         @result.close
       end
 
       it 'should also support old style array argument types' do
         @reader.set_types([String, String])
-        expect { @result = @reader.execute_reader('Buy this product now!') }.not_to raise_error(ArgumentError)
-        expect { @result.next!  }.not_to raise_error(DataObjects::DataError)
-        expect { @result.values }.not_to raise_error(DataObjects::DataError)
+        expect { @result = @reader.execute_reader('Buy this product now!') }.not_to raise_error
+        expect { @result.next!  }.not_to raise_error
+        expect { @result.values }.not_to raise_error
         @result.close
       end
 
       it 'should allow subtype types' do
         class MyString < String; end
         @reader.set_types(MyString, String)
-        expect { @result = @reader.execute_reader('Buy this product now!') }.not_to raise_error(ArgumentError)
-        expect { @result.next!  }.not_to raise_error(DataObjects::DataError)
-        expect { @result.values }.not_to raise_error(DataObjects::DataError)
+        expect { @result = @reader.execute_reader('Buy this product now!') }.not_to raise_error
+        expect { @result.next!  }.not_to raise_error
+        expect { @result.values }.not_to raise_error
         @result.close
       end
     end

@@ -3,7 +3,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), 'spec_helper'))
 describe DataObjects::Transaction do
 
   before :each do
-    @connection = mock("connection")
+    @connection = double("connection")
     DataObjects::Connection.should_receive(:new).with("mock://mock/mock").once.and_return(@connection)
     @transaction = DataObjects::Transaction.new("mock://mock/mock")
   end
@@ -27,12 +27,12 @@ describe DataObjects::Transaction do
   describe "#close" do
     it "should close its connection" do
       @connection.should_receive(:close).once
-      lambda { @transaction.close }.should_not raise_error(DataObjects::TransactionError)
+      expect { @transaction.close }.not_to raise_error
     end
   end
   [:prepare, :commit_prepared, :rollback_prepared].each do |meth|
     it "should raise NotImplementedError on #{meth}" do
-      lambda { @transaction.send(meth) }.should raise_error(NotImplementedError)
+      expect { @transaction.send(meth) }.to raise_error(NotImplementedError)
     end
   end
 

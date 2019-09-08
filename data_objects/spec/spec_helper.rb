@@ -13,3 +13,4 @@ end
 
 require File.expand_path(File.join(File.dirname(__FILE__), 'do_mock'))
 require File.expand_path(File.join(File.dirname(__FILE__), 'do_mock2'))
+JRUBY = RUBY_PLATFORM =~ /java/ unless defined?(JRUBY)
