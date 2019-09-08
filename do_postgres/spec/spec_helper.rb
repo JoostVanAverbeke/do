@@ -1,5 +1,5 @@
 $TESTING=true
-JRUBY = RUBY_PLATFORM =~ /java/
+JRUBY = RUBY_PLATFORM =~ /java/ unless defined?(JRUBY)
 
 require 'rubygems'
 require 'rspec'
@@ -31,20 +31,20 @@ at_exit { DataObjects.logger.flush }
 CONFIG = OpenStruct.new
 CONFIG.scheme    = 'postgres'
 CONFIG.user      = ENV['DO_POSTGRES_USER'] || 'postgres'
-CONFIG.pass      = ENV['DO_POSTGRES_PASS'] || ''
+CONFIG.pass      = ENV['DO_POSTGRES_PASS'] || '23prindle'
 CONFIG.user_info = unless CONFIG.pass.empty?
   "#{CONFIG.user}:#{CONFIG.pass}@"
 else
   "#{CONFIG.user}@"
 end
 CONFIG.host      = ENV['DO_POSTGRES_HOST'] || 'localhost'
-CONFIG.port      = ENV['DO_POSTGRES_PORT'] || '5432'
+CONFIG.port      = ENV['DO_POSTGRES_PORT'] || '5433'
 CONFIG.database  = ENV['DO_POSTGRES_DATABASE'] || '/do_test'
 
 CONFIG.driver       = 'postgres'
 CONFIG.jdbc_driver  = DataObjects::Postgres.const_get('JDBC_DRIVER') rescue nil
 CONFIG.uri          = ENV["DO_POSTGRES_SPEC_URI"] ||"#{CONFIG.scheme}://#{CONFIG.user_info}#{CONFIG.host}:#{CONFIG.port}#{CONFIG.database}"
-CONFIG.jdbc_uri     = CONFIG.uri.sub(/postgres/,"jdbc:postgresql")
+CONFIG.jdbc_uri     = "jdbc:postgresql://#{CONFIG.host}:#{CONFIG.port}#{CONFIG.database}?user=#{CONFIG.user}&password=#{CONFIG.pass}"
 CONFIG.sleep        = "SELECT pg_sleep(1)"
 
 module DataObjectsSpecHelpers

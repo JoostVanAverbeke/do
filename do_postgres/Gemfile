@@ -1,4 +1,4 @@
-source :rubygems
+source 'https://rubygems.org'
 
 path '../'
 
@@ -10,5 +10,8 @@ platforms :jruby do
 end
 
 group :development do # Development dependencies (as in the gemspec)
-  gem 'rake'
+  # we can't use rake 11, 12 due to Rake 11.0.1 removes the last_comment method which rspec 2.99
+  # uses
+  gem 'rake', '< 11.0'
+  gem 'rake-compiler', '~> 1.0.7'
 end
