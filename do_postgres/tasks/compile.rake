@@ -1,5 +1,5 @@
 begin
-  gem 'rake-compiler', '~> 1.0.7'
+  gem 'rake-compiler', '1.0.7'
   require 'rake/extensiontask'
   require 'rake/javaextensiontask'
 
@@ -68,10 +68,10 @@ begin
     ext.lib_dir   = "lib/#{gemspec.name}"
     ext.debug     = ENV.has_key?('DO_JAVA_DEBUG') && ENV['DO_JAVA_DEBUG']
     ext.classpath = '../do_jdbc/lib/do_jdbc_internal.jar'
-    ext.java_compiling do |gem|
-      gem.add_dependency 'jdbc-postgres', '>=8.2'
-      gem.add_dependency 'do_jdbc',       '0.10.17'
-    end
+    # ext.java_compiling do |gem|
+    #   gem.add_dependency 'jdbc-postgres', '>=8.2'
+    #   gem.add_dependency 'do_jdbc',       '0.10.18'
+    # end
   end
 rescue LoadError
   warn "To compile, install rake-compiler (gem install rake-compiler)"

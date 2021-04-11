@@ -31,14 +31,14 @@ at_exit { DataObjects.logger.flush }
 CONFIG = OpenStruct.new
 CONFIG.scheme    = 'postgres'
 CONFIG.user      = ENV['DO_POSTGRES_USER'] || 'postgres'
-CONFIG.pass      = ENV['DO_POSTGRES_PASS'] || '23prindle'
+CONFIG.pass      = ENV['DO_POSTGRES_PASS'] || 'password'
 CONFIG.user_info = unless CONFIG.pass.empty?
   "#{CONFIG.user}:#{CONFIG.pass}@"
 else
   "#{CONFIG.user}@"
 end
 CONFIG.host      = ENV['DO_POSTGRES_HOST'] || 'localhost'
-CONFIG.port      = ENV['DO_POSTGRES_PORT'] || '5433'
+CONFIG.port      = ENV['DO_POSTGRES_PORT'] || '5432'
 CONFIG.database  = ENV['DO_POSTGRES_DATABASE'] || '/do_test'
 
 CONFIG.driver       = 'postgres'

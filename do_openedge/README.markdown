@@ -89,6 +89,17 @@ To run individual specs:
 
 ### Spec data setup
 
+#### Prerequisites
+To run the specs, you need to add the openegde.jar, which is located in ./java subdirectory of $DLC directory 
+of your progress openedge installation (e.g. C:\Progressx86\OpenEdge\java) to your java CLASSPATH.
+
+How to add the CLASSPATH in your RubyMine development environment?
+Edit your Run -> 'Edit configuration' and add your CLASSPATH  specification in the 'Environment variables:'
+input field.
+```
+Environment Varibales: JRUBY_OPTS=-X+O;CLASSPATH=C:\Progressx86\OpenEdge\java
+```
+ 
 The specs require an empty database to use for running tests against
 (the database will be written/read from by the tests). Here are
 some commands to be ran from `proenv` to create an empty
@@ -98,7 +109,39 @@ which is required for proper multibyte string support):
     prodb test empty
     proutil test -C convchar convert utf-8
     sql_env
-    proserve test -S 4000
+    
+- Start progress 'data adminstration' application and conect to your newly created test database.
+- Create the user sysprogress
+- Choose "Admin" > Security > "Edit User List"
+- Create Progress default DBA user "sysprogress" as a user ID. Assign a password, for example, "x".
+- Start the progress database server
+```
+  proserve test -S 4000
+```
+- Connect with the sqlexp tool to the progress test database as user 'sysprogress':
+```       
+   sqlexp -db test -S 4000 -user sysprogress -password x
+```    
+- Create user test
+```
+   create user 'test', 'test';
+   commit;
+```   
+- Grant dba to user test
+```
+   grant dba to test;
+   commit;      
+```    
+
+## Progress Openedge DB test already exists
+Don't forget to start the following command prior starting the Progress Opendge db server :
+```
+   sql_env
+```
+- Start the progress database server
+```
+  proserve test -S 4000
+```
 
 ## License
 

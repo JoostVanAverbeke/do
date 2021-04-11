@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{do_jdbc}
-  s.version = "0.10.17"
+  s.version = "0.10.18"
   s.platform = %q{java}
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
@@ -30,20 +30,6 @@ Gem::Specification.new do |s|
   s.rubyforge_project = %q{dorb}
   s.rubygems_version = %q{1.3.6}
   s.summary = %q{DataObjects JDBC support library}
-
-  if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
-    s.specification_version = 3
-
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<data_objects>, ["= 0.10.17"])
-      s.add_development_dependency(%q<rake-compiler>, ["~> 0.7"])
-    else
-      s.add_dependency(%q<data_objects>, ["= 0.10.17"])
-      s.add_dependency(%q<rake-compiler>, ["~> 0.7"])
-    end
-  else
-    s.add_dependency(%q<data_objects>, ["= 0.10.17"])
-    s.add_dependency(%q<rake-compiler>, ["~> 0.7"])
-  end
+  s.add_dependency(%q<data_objects>, ["= 0.10.18"])
+  s.add_dependency(%q<rake-compiler>, ["1.0.7"])
 end

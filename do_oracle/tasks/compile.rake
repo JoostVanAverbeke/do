@@ -1,5 +1,5 @@
 begin
-  gem 'rake-compiler', '~>0.7'
+  gem 'rake-compiler', '1.0.7'
   require 'rake/extensiontask'
   require 'rake/javaextensiontask'
 
@@ -32,7 +32,7 @@ begin
       #       Gem::Specification API.
       gem.dependencies.delete_if { |d| d.name == 'ruby-oci8'}
 
-      gem.add_dependency "do_jdbc", '0.10.17'
+      gem.add_dependency "do_jdbc", '0.10.18'
     end
   end
 rescue LoadError

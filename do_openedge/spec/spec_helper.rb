@@ -26,15 +26,14 @@ require 'do_openedge'
 DataObjects::Openedge.logger = DataObjects::Logger.new(STDOUT, :off)
 at_exit { DataObjects.logger.flush }
 
-
 CONFIG              = OpenStruct.new
 CONFIG.scheme       = 'openedge'
 CONFIG.driver       = 'openedge'
 CONFIG.jdbc_driver  = DataObjects::Openedge.const_get('JDBC_DRIVER') rescue nil
 CONFIG.user         = ENV['DO_OPENEDGE_USER'] || 'test'
-CONFIG.pass         = ENV['DO_OPENEDGE_PASS'] || ''
-CONFIG.host         = ENV['DO_OPENEDGE_HOST'] || '192.168.1.241'
-CONFIG.port         = ENV['DO_OPENEDGE_PORT'] || '13370'
+CONFIG.pass         = ENV['DO_OPENEDGE_PASS'] || 'test'
+CONFIG.host         = ENV['DO_OPENEDGE_HOST'] || 'BE1-LT-JVA'
+CONFIG.port         = ENV['DO_OPENEDGE_PORT'] || '4000'
 CONFIG.database     = ENV['DO_OPENEDGE_DATABASE'] || 'test'
 # Result of this query must be a value of "1":
 CONFIG.testsql      = "SELECT SIGN(1) FROM SYSPROGRESS.SYSCALCTABLE"
@@ -43,7 +42,7 @@ CONFIG.jdbc_uri     = "jdbc:openedge://#{CONFIG.host}:#{CONFIG.port}/#{CONFIG.da
 
 module DataObjectsSpecHelpers
 
-  TABLE_NOT_FOUND_CODE = -20005
+  TABLE_NOT_FOUND_CODE = -210083
   SEQUENCE_NOT_FOUND_CODE = -210051
   SEQUENCE_NOT_VALID_CODE = -20170
   TRIGGER_NOT_FOUND_CODE = -20147

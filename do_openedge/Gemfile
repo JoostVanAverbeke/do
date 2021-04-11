@@ -5,8 +5,11 @@ path '../'
 gemspec
 
 platforms :jruby do
+  # The install of gem 'jdbc-openedge', '~> 11.1', doesn't work, it generates an error,
+  # therefore we need to skip the version part.
+  # gem 'jdbc-openedge', '~> 11.1'
   gem 'jdbc-openedge'
-  gem 'do_jdbc'
+  gem 'do_jdbc', '0.10.18'
 end
 
 group :development do # Development dependencies (as in the gemspec)
